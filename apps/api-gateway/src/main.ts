@@ -4,7 +4,7 @@ import cors from 'cors';
 import proxy from 'express-http-proxy';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
-import swaggerUi from 'swagger-ui-express';
+// import swaggerUi from 'swagger-ui-express';
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use('trust proxy'); //for end to end testing
+app.enable('trust proxy'); //for end to end testing
 
 //? rate limiter
 const rateLimiter = rateLimit({
@@ -31,7 +31,6 @@ const rateLimiter = rateLimit({
   message: { message: 'Too many requests, please try again later.' },
   standardHeaders: true,
   legacyHeaders: true,
-  keyGenerator: (req: any) => req.ip, //* rate limit for a specific ip
 });
 app.use(rateLimiter);
 
