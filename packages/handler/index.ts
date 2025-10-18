@@ -26,38 +26,35 @@ export class NotFoundError extends AppError {
 
 //! Validation Error (for Joi/zod)
 export class ValidationError extends AppError {
-  constructor(message: 'invalid req data', details?: unknown) {
+  constructor(message: string, details?: unknown) {
     super(message, 400, true, details);
   }
 }
 
 //! Authentication Error
 export class AuthenticationError extends AppError {
-  constructor(
-    message: 'unauthorized' | 'invalid token' | 'token expired',
-    details?: unknown
-  ) {
+  constructor(message: string, details?: unknown) {
     super(message, 401, true, details);
   }
 }
 
 //! Forbidden Error
 export class ForbiddenError extends AppError {
-  constructor(message: 'forbidden access', details?: unknown) {
+  constructor(message: string, details?: unknown) {
     super(message, 403, true, details);
   }
 }
 
 //! Database Error
 export class DatabaseError extends AppError {
-  constructor(message: 'database error', details?: unknown) {
+  constructor(message: string, details?: unknown) {
     super(message, 500, true, details);
   }
 }
 
 //! Rate Limit Error
 export class RateLimitError extends AppError {
-  constructor(message: 'rate limit exceeded', details?: unknown) {
+  constructor(message: string, details?: unknown) {
     super(message, 429, true, details);
   }
 }
