@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AppError } from '.';
+import { AppError } from './index';
 
 export const errorHandler = (err: Error, req: Request, res: Response) => {
   //? handle app error
