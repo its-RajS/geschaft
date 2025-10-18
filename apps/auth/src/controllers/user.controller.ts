@@ -6,7 +6,7 @@ import {
   validationRegistrationData,
 } from '../utils/auth.helper';
 import prisma from 'packages/libs/prisma';
-import { ValidationError } from '@geschaft/handler';
+import { ValidationError } from 'packages/handler/index';
 
 export const userRegistration = async (
   req: Request,

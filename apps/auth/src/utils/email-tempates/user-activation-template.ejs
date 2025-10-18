@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Your Geschaft Account</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    "
+  >
+    <table
+      align="center"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      style="border-collapse: collapse"
+    >
+      <tr>
+        <td align="center" style="padding: 40px 0 30px 0">
+          <table
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            width="600"
+            style="
+              border-collapse: collapse;
+              background-color: #ffffff;
+              border-radius: 8px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <tr>
+              <td
+                align="center"
+                style="
+                  padding: 30px 20px 20px 20px;
+                  background-color: #005b4c;
+                  border-top-left-radius: 8px;
+                  border-top-right-radius: 8px;
+                "
+              >
+                <h1 style="margin: 0; font-size: 24px; color: #ffeeca">
+                  Geschaft
+                </h1>
+                <p style="margin: 5px 0 0 0; font-size: 14px; color: #aa9979">
+                  Your E-commerce Destination
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 30px 40px 40px 40px">
+                <p style="color: #333333; font-size: 16px; line-height: 1.6">
+                  Hello **<%= data.name %>**,
+                </p>
+
+                <p style="color: #333333; font-size: 16px; line-height: 1.6">
+                  To complete your login and securely access your **Geschaft**
+                  account, please use the following One-Time Password (OTP).
+                </p>
+
+                <table
+                  border="0"
+                  cellpadding="0"
+                  cellspacing="0"
+                  width="100%"
+                  style="
+                    margin: 25px 0;
+                    background-color: #e2cfad;
+                    border-radius: 6px;
+                  "
+                >
+                  <tr>
+                    <td align="center" style="padding: 20px">
+                      <p
+                        style="
+                          color: #005b4c;
+                          font-size: 18px;
+                          font-weight: bold;
+                          margin: 0;
+                        "
+                      >
+                        Your Verification Code:
+                      </p>
+                      <p
+                        style="
+                          color: #005b4c;
+                          font-size: 36px;
+                          font-weight: bold;
+                          letter-spacing: 5px;
+                          margin: 10px 0 0 0;
+                        "
+                      >
+                        **<%= data.otp %>**
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="color: #333333; font-size: 14px; line-height: 1.6">
+                  Please enter this code on the website to verify your identity.
+                  This code is valid for a limited time and should not be shared
+                  with anyone.
+                </p>
+
+                <p
+                  style="
+                    color: #333333;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    margin-top: 30px;
+                  "
+                >
+                  Thank you for choosing **Geschaft**!
+                </p>
+                <p
+                  style="
+                    color: #333333;
+                    font-size: 16px;
+                    line-height: 1.6;
+                    margin-bottom: 0;
+                  "
+                >
+                  Best regards,
+                </p>
+                <p
+                  style="
+                    color: #005b4c;
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                  "
+                >
+                  The Geschaft Team
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td
+                align="center"
+                style="
+                  padding: 20px 40px;
+                  background-color: #aa9979;
+                  border-bottom-left-radius: 8px;
+                  border-bottom-right-radius: 8px;
+                "
+              >
+                <p style="color: #005b4c; font-size: 12px; margin: 0">
+                  Geschaft is a premier e-commerce application dedicated to
+                  providing you with the best shopping experience.
+                </p>
+                <p style="color: #005b4c; font-size: 12px; margin: 5px 0 0 0">
+                  &copy; <%= new Date().getFullYear() %> Geschaft. All rights
+                  reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

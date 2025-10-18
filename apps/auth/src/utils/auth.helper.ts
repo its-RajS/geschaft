@@ -1,7 +1,7 @@
 // ! As we need user registratioon for seller and customer
 
 import crypto from 'crypto';
-import { ValidationError } from '@geschaft/handler';
+import { ValidationError } from 'packages/handler/index';
 import { NextFunction } from 'express';
 import redis from 'packages/libs/redis';
 import { sendEmail } from './sendMail';
