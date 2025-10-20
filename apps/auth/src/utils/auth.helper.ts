@@ -1,9 +1,9 @@
 // ! As we need user registratioon for seller and customer
 
 import crypto from 'crypto';
-import { ValidationError } from 'packages/handler/index';
 import { NextFunction } from 'express';
-import redis from 'packages/libs/redis';
+import { ValidationError } from '@geschaft/handler';
+import redis from '@geschaft/libs/redis';
 import { sendEmail } from './sendMail';
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,7 +44,7 @@ export const checkEmailOtpRestriction = async (
   if (await redis.get(`otp_lock:${email}`)) {
     return next(
       new ValidationError(
-        'Account locked due to multiple failed attempts! Try again after 10 mins'
+        'Account locked due to multiple failed attempts! Try again after 2 mins'
       )
     );
   }
@@ -92,4 +92,35 @@ export const sendOtp = async (
   //? create a redis cache logic
   await redis.set(`otp:${email}`, otp, 'EX', 300); //? 5 min timer
   await redis.set(`otp_coolDown:${email}`, 'true', 'EX', 60); //? 1 min timer (adv. security)
+};
+
+export const verifyOtp = async (
+  email: string,
+  otp: string,
+  next: NextFunction
+) => {
+  const storedOtp = await redis.get(`otp:${email}`);
+  if (!storedOtp) {
+    throw new ValidationError('Invalid or expired OTP');
+  }
+
+  const failedAttemptsKey = `otp_attempts:${email}`;
+  const failedAttempts = parseInt((await redis.get(failedAttemptsKey)) || '0');
+
+  //? acc. lock logic on bases of otp
+  if (storedOtp !== otp) {
+    if (failedAttempts >= 3) {
+      await redis.set(`otp_lock:${email}`, 'locked', 'EX', 120); //* 2 min lock
+      await redis.del(`otp:${email}`, failedAttemptsKey);
+      throw new ValidationError(
+        'Too many failed attempts. Your account is locked for 2 mins.'
+      );
+    }
+    await redis.set(failedAttemptsKey, failedAttempts + 1, 'EX', 300); //* expire after 5min
+    throw new ValidationError(
+      `Incorrect OTP. ${3 - failedAttempts} attempts left.`
+    );
+  }
+
+  await redis.del(`otp:${email}`, failedAttemptsKey);
 };

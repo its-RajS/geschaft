@@ -20,7 +20,10 @@
     "customConditions": ["@geschaft/source"],
     "paths": {
       "@geschaft/handler": ["packages/handler/index.ts"],
-      "@geschaft/handler/*": ["packages/handler/*"]
+      "@geschaft/handler/*": ["packages/handler/*"],
+      "@geschaft/libs/prisma": ["packages/libs/prisma/index.ts"],
+      "@geschaft/libs/redis": ["packages/libs/redis/index.ts"],
+      "@prisma/client": ["generated/prisma/index.d.ts"]
     }
   }
 }

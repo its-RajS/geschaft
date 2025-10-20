@@ -2,7 +2,12 @@
   "name": "@geschaft/auth",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "dev": "node src/main.ts"
+  },
   "nx": {
+    "projectType": "application",
+    "sourceRoot": "apps/auth/src",
     "targets": {
       "build": {
         "executor": "@nx/esbuild:esbuild",
@@ -16,11 +21,15 @@
           "format": [
             "cjs"
           ],
-          "bundle": false,
+          "bundle": true,
           "main": "apps/auth/src/main.ts",
           "tsConfig": "apps/auth/tsconfig.app.json",
           "assets": [
             "apps/auth/src/assets"
+          ],
+          "external": [
+            "@prisma/client",
+            ".prisma/client"
           ],
           "esbuildOptions": {
             "sourcemap": true,

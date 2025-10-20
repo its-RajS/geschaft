@@ -23,6 +23,7 @@ const renderEmailTemplate = async (
 ): Promise<string> => {
   const templetePath = path.join(
     process.cwd(),
+    'apps',
     'auth',
     'src',
     'utils',

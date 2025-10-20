@@ -1,14 +1,20 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { AppError } from './index';
 
-export const errorHandler = (err: Error, req: Request, res: Response) => {
+export const errorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
+  void _next;
   //? handle app error
   if (err instanceof AppError) {
-    res
+    return res
       .status(err.httpStatusCode)
-      .json({ message: err.message, details: err.details });
+      .json({ status: 'error', message: err.message, details: err.details });
   } else {
     console.log('unhandled error', err);
-    res.status(500).json({ message: 'Something went wrong' });
+    return res.status(500).json({ message: 'Something went wrong' });
   }
 };

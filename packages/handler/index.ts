@@ -58,3 +58,6 @@ export class RateLimitError extends AppError {
     super(message, 429, true, details);
   }
 }
+
+// Export error handler
+export { errorHandler } from './error-handler';

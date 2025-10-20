@@ -1,4 +1,10 @@
 import swaggerAutogen from 'swagger-autogen';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const docs = {
   info: {
@@ -10,7 +16,7 @@ const docs = {
   schemes: ['http'],
 };
 
-const outputFile = './swagger-output.json';
-const endPoint = ['./routes/user.routes.ts'];
+const outputFile = path.join(__dirname, 'swagger-output.json');
+const endPoint = [path.join(__dirname, 'routes', 'user.routes.ts')];
 
 swaggerAutogen()(outputFile, endPoint, docs);

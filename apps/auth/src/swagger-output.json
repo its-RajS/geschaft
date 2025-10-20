@@ -6,31 +6,22 @@
     "version": "1.0.0"
   },
   "host": "localhost:6001",
-  "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "basePath": "/auth",
+  "schemes": ["http"],
   "paths": {
     "/user-registration": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                }
-              }
-            }
+        "responses": {
+          "default": {
+            "description": ""
           }
-        ],
+        }
+      }
+    },
+    "/verify-user": {
+      "post": {
+        "description": "",
         "responses": {
           "default": {
             "description": ""
