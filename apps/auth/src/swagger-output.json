@@ -11,20 +11,83 @@
   "paths": {
     "/user-registration": {
       "post": {
-        "description": "",
+        "description": "Register a new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Yash",
+                  "description": "User's full name"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "rajsharma222547@gmail.com",
+                  "description": "User's email address"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456789",
+                  "description": "User's password"
+                }
+              },
+              "required": ["name", "email", "password"]
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "User registered successfully"
           }
         }
       }
     },
     "/verify-user": {
       "post": {
-        "description": "",
+        "description": "Verify user with OTP",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Yash",
+                  "description": "User's full name"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "rajsharma222547@gmail.com",
+                  "description": "User's email address"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "123456789",
+                  "description": "User's password"
+                },
+                "otp": {
+                  "type": "string",
+                  "example": "",
+                  "description": "One-time password for verification"
+                }
+              },
+              "required": ["name", "email", "password", "otp"]
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "User verified successfully"
           }
         }
       }

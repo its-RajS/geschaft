@@ -1,5 +1,4 @@
 import express from 'express';
-import * as path from 'path';
 import cors from 'cors';
 import proxy from 'express-http-proxy';
 import rateLimit from 'express-rate-limit';
@@ -33,8 +32,6 @@ const rateLimiter = rateLimit({
   legacyHeaders: true,
 });
 app.use(rateLimiter);
-
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/api-gateway-health', (req, res) => {
   res.send({ message: 'Welcome to api-gateway!' });

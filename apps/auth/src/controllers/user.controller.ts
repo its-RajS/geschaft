@@ -7,8 +7,9 @@ import {
   verifyOtp,
 } from '../utils/auth.helper';
 import prisma from '@geschaft/libs/prisma';
-import { ValidationError } from '@geschaft/handler';
+import { AuthenticationError, ValidationError } from '@geschaft/handler';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export const userRegistration = async (
   req: Request,
@@ -76,6 +77,57 @@ export const verifyUser = async (
         email,
       },
     });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const login = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return next(new ValidationError('Email and password both are required!'));
+    }
+
+    //* get user from db
+    const user = await prisma.user.findFirst({ where: { email } });
+    if (!user) return next(new AuthenticationError(`User doesn't exists!`));
+    if (!user.password)
+      return next(new AuthenticationError(`Password is required`));
+
+    //* verify the password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return next(new AuthenticationError(`Invalid email or password`));
+
+    //? Generate access and refresh token
+    //* access token
+    const accessToken = jwt.sign(
+      {
+        id: user.id,
+        role: 'user',
+      },
+      process.env.ACCESS_TOKEN_SECRET as string,
+      {
+        expiresIn: '15m',
+      }
+    );
+    //* refresh token
+    const refreshToken = jwt.sign(
+      {
+        id: user.id,
+        role: 'user',
+      },
+      process.env.REFRESH_TOKEN_SECRET as string,
+      {
+        expiresIn: '7d',
+      }
+    );
   } catch (error) {
     return next(error);
   }
